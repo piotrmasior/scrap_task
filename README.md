@@ -9,16 +9,31 @@ HOW TO RUN:
 
 
 ~~~bash
-ruby core.rb "other text"
+ruby lib/core.rb "other text"
 ~~~
 
 or by default
 
 ~~~bash
-ruby core.rb
+ruby lib/core.rb
 ~~~
 
 > by default will go with "charlie sheen winning"
+
+TODO (possible improvements):
+----
+* add sh script to run it from root directory
+* add some fancy formatter for better output
+* refactor google method to some general_purpose scraping path with custom strategies like:
+~~~ruby
+scrap_strategy("www.somesite.com") do |wraper|
+#browser.start
+wraper.specific.methods
+wraper.goes.here
+#scraping iteration
+#browser.stop
+end
+~~~
 
 WARNING
 ------------
