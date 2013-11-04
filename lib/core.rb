@@ -18,6 +18,7 @@ class AevScrap
     print_results
   end
 
+  #todo: refactor it to something like scrap_anything where &block can be passed with correct strategy
   def scrap_google(phrase)
     @browser = Watir::Browser.start  "https://www.google.com/"
     @browser.text_field(:name, "q").set phrase
@@ -32,8 +33,8 @@ class AevScrap
   end
 
   def show_results
-    puts "Here you are sorted #{results_found} results:"
-    puts sorted_results
+    log "Here you are sorted #{results_found} results:"
+    log sorted_results.reverse
   end
 
   private
@@ -48,7 +49,7 @@ class AevScrap
   end
 
   def print_results
-    puts @results
+    log @results
   end
 
   def sorted_results
@@ -66,6 +67,10 @@ class AevScrap
     Watir::Wait.until(5) do
       @browser.element(:id => "flyr", :class => "flyr-c").exists?
     end
+  end
+
+  def log(what)
+    puts "#{what}"
   end
 end
 

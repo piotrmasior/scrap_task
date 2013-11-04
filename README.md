@@ -1,3 +1,9 @@
+WATIR google search headlines scraper:
+-----------
+
+Demonstration purpose only.
+
+
 HOW TO RUN:
 -----------
 
