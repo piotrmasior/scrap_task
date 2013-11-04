@@ -1,40 +1,38 @@
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+
 require 'rubygems'
 require 'watir'
 require 'nokogiri'
+require 'aev/formatter'
 
-STDOUT.sync = true
-
-# HOW TO RUN:
-# ruby core.rb "other text"
-# by default will go with "charlie sheen winning"
 
 class AevScrap
 
   attr_reader :results
 
-  def initialize(phrase="charlie sheen winning")
+  def initialize(phrase="charlie sheen winning", pages=2)
     @results = []
-    self.scrap_google(phrase)
-    print_results
+    @pages = pages + 1
+    @phrase = phrase
+    self.scrap_google
+    @formatter = Aev::Formatter.new(results)
   end
 
-  #todo: refactor it to something like scrap_anything where &block can be passed with correct strategy
-  def scrap_google(phrase)
+  def output
+    @formatter.summary
+  end
+
+  def scrap_google
     @browser = Watir::Browser.start  "https://www.google.com/"
-    @browser.text_field(:name, "q").set phrase
+    @browser.text_field(:name, "q").set @phrase
     @browser.button(:name, "btnG").click
-    (2..11).step(1) do  |x|
+    (2..@pages).step(1) do  |x|
       wait_for_results
       utilize_results
       go_next_page(x)
     end
 
     @browser.close
-  end
-
-  def show_results
-    log "Here you are sorted #{results_found} results:"
-    log sorted_results.reverse
   end
 
   private
@@ -48,17 +46,6 @@ class AevScrap
     @page_html.css('h3').map { |link| @results << link.text }
   end
 
-  def print_results
-    log @results
-  end
-
-  def sorted_results
-    @results.sort_by{ |m| m.downcase }
-  end
-
-  def results_found
-    @results.size
-  end
 
   #remember to not invoke before page_html set
   def go_next_page(page)
@@ -69,11 +56,8 @@ class AevScrap
     end
   end
 
-  def log(what)
-    puts "#{what}"
-  end
 end
 
 core = (ARGV.length > 0 ? AevScrap.new(ARGV.first.chomp) : AevScrap.new)
-core.show_results
+core.output
 

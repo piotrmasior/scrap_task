@@ -23,7 +23,6 @@ ruby lib/core.rb
 TODO (possible improvements):
 ----
 * add sh script to run it from root directory
-* add some fancy formatter for better output
 * refactor google method to some general_purpose scraping path with custom strategies like:
 
 ~~~ruby
