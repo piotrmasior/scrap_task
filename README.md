@@ -1,12 +1,20 @@
-WATIR google search headlines scraper:
+WATIR with headless example
 -----------
 
+Scraping first 30 results from google (limited because google blocks IP when to many requests occur)
+Presenting only headlines on console.
 Demonstration purpose only.
+
+INSTALL
+-------
+
+~~~bash
+sudo apt-get install xvfb
+~~~
 
 
 HOW TO RUN:
 -----------
-
 
 ~~~bash
 ruby lib/core.rb "other text"

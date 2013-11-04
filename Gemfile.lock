@@ -3,8 +3,8 @@ GEM
   specs:
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
-    commonwatir (4.0.0)
     ffi (1.9.3)
+    headless (1.0.1)
     hirb (0.7.1)
     mini_portile (0.5.2)
     multi_json (1.8.2)
@@ -16,9 +16,6 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0.0)
       websocket (~> 1.0.4)
-    watir (5.0.0)
-      commonwatir (~> 4)
-      watir-webdriver
     watir-webdriver (0.6.4)
       selenium-webdriver (>= 2.18.0)
     websocket (1.0.7)
@@ -27,6 +24,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  headless
   hirb
   nokogiri
-  watir
+  watir-webdriver

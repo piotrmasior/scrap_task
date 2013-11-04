@@ -1,8 +1,9 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'rubygems'
-require 'watir'
+require 'watir-webdriver'
 require 'nokogiri'
+require 'headless'
 require 'aev/formatter'
 
 
@@ -14,7 +15,9 @@ class AevScrap
     @results = []
     @pages = pages + 1
     @phrase = phrase
-    self.scrap_google
+    head_env do
+      self.scrap_google
+    end
     @formatter = Aev::Formatter.new(results)
   end
 
@@ -36,6 +39,13 @@ class AevScrap
   end
 
   private
+
+  def head_env(&block)
+    headless = Headless.new
+    headless.start
+    block.call
+    headless.destroy
+  end
 
   def wait_for_results
     @browser.element(:id => "res").wait_until_present
