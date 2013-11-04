@@ -18,7 +18,7 @@ or by default
 ruby core.rb
 ~~~
 
-# by default will go with "charlie sheen winning"
+> by default will go with "charlie sheen winning"
 
 WARNING
 ------------
